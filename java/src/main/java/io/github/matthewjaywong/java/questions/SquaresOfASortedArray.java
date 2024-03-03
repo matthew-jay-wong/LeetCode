@@ -1,11 +1,5 @@
 package io.github.matthewjaywong.java.questions;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.function.Function;
-
 /**
  * <h1>
  *     <a href="https://leetcode.com/problems/squares-of-a-sorted-array">977. Squares of a Sorted Array</a>
