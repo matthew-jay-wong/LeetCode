@@ -2,31 +2,43 @@ package io.github.matthewjaywong.java.questions;
 
 /**
  * <h1>
- *     <a href="https://leetcode.com/problems/max-consecutive-ones-iii/description/">1004. Max Consecutive Ones III</a>
+ * <a href="https://leetcode.com/problems/max-consecutive-ones-iii/description/">1004. Max Consecutive Ones III</a>
  * </h1>
  * <h2>
- *     LeetCode 75
+ * LeetCode 75
  * </h2>
  * <h3>
- *     Medium
+ * Medium
  * </h3>
  * <p>
- *     Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
+ * Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
  * </p>
  */
 public class MaxConsecutiveOnesIII {
     public int solution(int[] nums, int k) {
-        int last1 = -1;
-        int i = 0;
-        while (i < nums.length) {
-            while (nums[i] == 0)
-                i += 1;
-            int left = i;
+        int max = Integer.MIN_VALUE;
+        for (int slow = 0; slow < nums.length; slow++) {
+            if (slow > 0 && nums[slow] == 1 && nums[slow - 1] == 1)
+                continue;
 
-            while (nums[i] == 1)
-                i += 1;
-            int right  = i;
+            int flipCount = 0;
+            boolean reachedEnd = true;
+            for (int fast = slow; fast < nums.length; fast++) {
+                if (nums[fast] == 0 && flipCount < k)
+                    flipCount += 1;
+                else if (nums[fast] == 0 && flipCount == k) {
+                    max = Math.max(max, fast - slow);
+                    reachedEnd = false;
+                    break;
+                }
+            }
+
+            if (reachedEnd) {
+                max = Math.max(max, nums.length - slow);
+                return max;
+            }
         }
-        return -1;// TODO
+
+        return max;
     }
 }

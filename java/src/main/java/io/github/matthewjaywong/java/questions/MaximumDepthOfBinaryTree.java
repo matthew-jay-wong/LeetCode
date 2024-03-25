@@ -22,19 +22,19 @@ import java.util.Objects;
  * </p>
  */
 public class MaximumDepthOfBinaryTree {
-    public int maxDepth(TreeNode root) {
-        if (Objects.isNull(root))
-            return 0;
-
-        if (Objects.isNull(root.right()) && Objects.isNull(root.left()))
-            return 1;
-
-        if (Objects.isNull(root.right()))
-            return 1 + this.maxDepth(root.left());
-
-        if (Objects.isNull(root.left()))
-            return 1 + this.maxDepth(root.right());
-
-        return 1 + Math.max(this.maxDepth(root.right()), this.maxDepth(root.left()));
-    }
+//    public int maxDepth(TreeNode root) {
+//        if (Objects.isNull(root))
+//            return 0;
+//
+//        if (Objects.isNull(root.right()) && Objects.isNull(root.left()))
+//            return 1;
+//
+//        if (Objects.isNull(root.right()))
+//            return 1 + this.maxDepth(root.left());
+//
+//        if (Objects.isNull(root.left()))
+//            return 1 + this.maxDepth(root.right());
+//
+//        return 1 + Math.max(this.maxDepth(root.right()), this.maxDepth(root.left()));
+//    }
 }

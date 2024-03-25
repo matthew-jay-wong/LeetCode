@@ -17,12 +17,12 @@ public class FindBottomLeftTreeValue {
             LinkedList<TreeNode> temp = new LinkedList<>();
             while (!stack.isEmpty()) {
                 TreeNode cur = stack.pop();
-                if (Objects.nonNull(cur.right()))
-                    temp.addLast(cur.right());
-                if (Objects.nonNull(cur.left()))
-                    temp.addLast(cur.left());
+                if (Objects.nonNull(cur.right))
+                    temp.addLast(cur.right);
+                if (Objects.nonNull(cur.left))
+                    temp.addLast(cur.left);
                 if (temp.isEmpty() && stack.isEmpty())
-                    return cur.val();
+                    return cur.val;
             }
             stack = temp;
         }
