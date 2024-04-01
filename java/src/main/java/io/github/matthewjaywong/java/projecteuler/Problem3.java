@@ -1,9 +1,6 @@
 package io.github.matthewjaywong.java.projecteuler;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * <h1>
@@ -21,27 +18,41 @@ public class Problem3 {
         System.out.println(problem3.solution(6_008_514_751_43L));
     }
 
-    private static final Set<Long> primesSorted = new HashSet<>();
+    private static final SortedSet<Long> primesSorted = new TreeSet<>(Set.of(2L, 3L));
 
-    static {
-        primesSorted.addAll(Set.of(2L, 3L, 5L, 7L, 11L, 13L));
-    }
-
-    public int solution(long num) {
+    public long solution(long num) {
         long cur = num;
         while (!primesSorted.contains(cur)) {
-            boolean factored = false;
+            boolean factorized = false;
             for (long prime : primesSorted) {
                 if (cur % prime == 0) {
                     cur /= prime;
-                    factored = true;
+                    factorized = true;
                     break;
                 }
             }
 
-            // TODO
+            if (factorized)
+                continue;
+
+            for (long potentialPrime = primesSorted.last() + 2; potentialPrime < Math.sqrt(cur); potentialPrime += 2) {
+                long finalPotentialPrime = potentialPrime;
+                if (primesSorted.stream().allMatch((p) -> finalPotentialPrime % p != 0)) {
+                    primesSorted.add(potentialPrime);
+                    if (cur % potentialPrime == 0) {
+                        cur /= potentialPrime;
+                        factorized = true;
+                        break;
+                    }
+                }
+            }
+
+            if (factorized)
+                continue;
+
+            return cur;
         }
 
-        return -1;
+        return cur;
     }
 }
