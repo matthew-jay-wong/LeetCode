@@ -69,6 +69,7 @@ public class Problem8 {
             if (substring.contains("0"))
                 continue;
 
+            //noinspection OptionalGetWithoutIsPresent
             res = res.max(
                     Arrays.stream(substring.split(""))
                             .map(BigInteger::new)
